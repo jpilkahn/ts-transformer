@@ -1,0 +1,58 @@
+{
+    "author": {
+        "email": "j.pilkahn@gmail.com",
+        "name": "Johannes Pilkahn",
+        "url": "https://github.com/jpilkahn"
+    },
+    "description": "monorepo - root workspace",
+    "license": "BSD-2-Clause",
+    "name": "@jpilkahn/worktree-root",
+    "packageManager": "yarn@3.2.0",
+    "private": true,
+    "scripts": {
+        "build:clean": "yarn clean:install && yarn build:default",
+        "build:tsc": "cd $INIT_CWD && yarn tsc",
+        "build:ttsc": "cd $INIT_CWD && yarn ttsc",
+        "clean": "concurrently 'yarn clean:cache' 'yarn clean:lockfile' 'yarn clean:pnp'",
+        "clean:cache": "yarn cache clean",
+        "clean:install": "yarn clean && yarn install",
+        "clean:lockfile": "rimraf package-lock.json yarn.lock",
+        "clean:mirror": "yarn cache clean --mirror",
+        "clean:pnp": "rimraf .pnp?(.data)js?(on)",
+        "exec:parallel": "lerna exec --parallel",
+        "journal:workspaces": "yarn workspaces:json > etc/journal/workspaces.list.json",
+        "lint": "eslint --cache --cache-location .cache/eslint",
+        "lint:all": "yarn lint '{etc,packages}/**/src/**/*.{js,jsx,ts,tsx}'",
+        "lint:all:fix": "yarn lint:all --fix",
+        "lint:fix": "yarn lint --fix",
+        "lint:staged": "lint-staged",
+        "pnp:sdk:vim": "yarn dlx @yarnpkg/pnpify --sdk vim",
+        "pnp:sdk:vscode": "yarn dlx @yarnpkg/pnpify --sdk vscode",
+        "publish": "lerna publish",
+        "run:parallel": "lerna run --parallel",
+        "start": "lerna run start",
+        "test": "lerna run test --concurrency 1",
+        "test:coverage": "lerna run test:coverage --parallel",
+        "test:quick": "lerna run test:quick --concurrency 1",
+        "test:watch": "lerna run test:watch --parallel",
+        "util:process-env": "node -e 'console.log(process.env)' | grep npm",
+        "validate:config": "yarn validate:config:yarn",
+        "validate:config:yarn": "yarn config -v",
+        "validate:pnp": "yarn dlx @yarnpkg/doctor",
+        "version": "yarn version",
+        "workspaces:json": "yarn workspaces list --json",
+        "workspaces:list": "yarn workspaces list",
+        "yarn:sdk:vim": "yarn dlx @yarnpkg/sdks vim",
+        "yarn:sdk:vscode": "yarn dlx @yarnpkg/sdks vscode"
+    },
+    "workspaces": [
+        "etc",
+        "packages"
+    ],
+    "devDependencies": {
+        "@jpilkahn/tsconfig": "workspace:*",
+        "concurrently": "^7.0.0",
+        "lerna": "^4.0.0",
+        "typescript": "^4.6.2"
+    }
+}

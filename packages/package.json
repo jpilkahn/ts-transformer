@@ -1,0 +1,7 @@
+{
+    "name": "@jpilkahn/worktree-packages",
+    "private": true,
+    "workspaces": [
+        "**"
+    ]
+}
