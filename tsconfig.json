@@ -1,0 +1,6 @@
+{
+    "extends": "@jpilkahn/tsconfig",
+    "compilerOptions": {
+        "outDir": "build"
+    }
+}

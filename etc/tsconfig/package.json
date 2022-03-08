@@ -1,0 +1,32 @@
+{
+    "author": {
+        "email": "j.pilkahn@gmail.com",
+        "name": "Johannes Pilkahn",
+        "url": "https://github.com/jpilkahn"
+    },
+    "bugs": {
+        "email": "j.pilkahn+bugs@gmail.com",
+        "url": "https://github.com/jpilkahn/repository/issues"
+    },
+    "description": "Shareable TypeScript configuration(s)",
+    "files": [
+        "tsconfig.json"
+    ],
+    "homepage": "https://github.com/jpilkahn/repository/etc/tsconfig#readme",
+    "keywords": [
+        "typescript",
+        "tsconfig"
+    ],
+    "license": "BSD-2-Clause",
+    "main": "tsconfig.json",
+    "module": "tsconfig.json",
+    "name": "@jpilkahn/tsconfig",
+    "repository": {
+        "directory": "etc/tsconfig",
+        "type": "git",
+        "url": "git+https://github.com/jpilkahn/repository.git"
+    },
+    "sideEffects": false,
+    "type": "module",
+    "version": "0.0.1"
+}
