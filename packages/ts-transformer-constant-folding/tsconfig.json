@@ -1,0 +1,13 @@
+{
+    "extends": "@jpilkahn/tsconfig",
+    "compilerOptions": {
+        "declarationMap": false,
+        "isolatedModules": false,
+        "outDir": "build",
+        "plugins": [{
+            "transform": "./ts-transformer-constant-folding.ts"
+        }],
+        "sourceMap": false
+    },
+    "files": ["test/input.ts"]
+}

@@ -1,0 +1,38 @@
+{
+    "author": {
+        "email": "j.pilkahn@gmail.com",
+        "name": "Johannes Pilkahn",
+        "url": "https://github.com/jpilkahn"
+    },
+    "bugs": {
+        "email": "j.pilkahn+bugs@gmail.com",
+        "url": "https://github.com/jpilkahn/repository/issues"
+    },
+    "devDependencies": {
+        "@jpilkahn/tsconfig": "workspace:*",
+        "@types/node": "^17.0.21",
+        "ts-node": "^10.7.0",
+        "ttypescript": "^1.5.13",
+        "typescript": "^4.6.2"
+    },
+    "description": "A TypeScript transformer enabling constant folding",
+    "homepage": "https://github.com/jpilkahn/repository/packages/ts-transformer-constant-folding#readme",
+    "keywords": [
+        "typescript",
+        "transformer",
+        "constant",
+        "folding"
+    ],
+    "license": "BSD-2-Clause",
+    "name": "@jpilkahn/ts-transformer-constant-folding",
+    "repository": {
+        "directory": "packages/ts-transformer-constant-folding",
+        "type": "git",
+        "url": "git+https://github.com/jpilkahn/repository.git"
+    },
+    "scripts": {
+        "build:default": "yarn build:ttsc"
+    },
+    "sideEffects": false,
+    "version": "0.0.1"
+}
