@@ -67,6 +67,7 @@ __metadata:
   resolution: "@jpilkahn/ts-transformer-constant-folding@workspace:packages/ts-transformer-constant-folding"
   dependencies:
     "@jpilkahn/tsconfig": "workspace:*"
+    "@types/node": ^17.0.21
     ts-node: ^10.7.0
     ttypescript: ^1.5.13
     typescript: ^4.6.2
@@ -1185,6 +1186,13 @@ __metadata:
   version: 1.2.2
   resolution: "@types/minimist@npm:1.2.2"
   checksum: b8da83c66eb4aac0440e64674b19564d9d86c80ae273144db9681e5eeff66f238ade9515f5006ffbfa955ceff8b89ad2bd8ec577d7caee74ba101431fb07045d
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^17.0.21":
+  version: 17.0.21
+  resolution: "@types/node@npm:17.0.21"
+  checksum: 89dcd2fe82f21d3634266f8384e9c865cf8af49685639fbdbd799bdd1040480fb1e8eeda2d3b9fce41edbe704d2a4be9f427118c4ae872e8d9bb7cbeb3c41a94
   languageName: node
   linkType: hard
 

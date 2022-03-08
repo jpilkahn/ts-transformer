@@ -31,7 +31,9 @@
         "url": "git+https://github.com/jpilkahn/repository.git"
     },
     "scripts": {
-        "build:default": "yarn build:ttsc"
+        "build:default": "yarn build:ttsc",
+        "build:test": "yarn build:default && yarn test",
+        "test": "yarn ts-node test/test.ts"
     },
     "sideEffects": false,
     "version": "0.0.1"

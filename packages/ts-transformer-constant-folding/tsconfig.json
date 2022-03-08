@@ -7,7 +7,8 @@
         "plugins": [{
             "transform": "./ts-transformer-constant-folding.ts"
         }],
-        "sourceMap": false
+        "sourceMap": false,
+        "types": ["node"]
     },
     "files": ["test/input.ts"]
 }

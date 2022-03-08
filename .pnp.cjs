@@ -130,6 +130,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@jpilkahn/ts-transformer-constant-folding", "workspace:packages/ts-transformer-constant-folding"],\
             ["@jpilkahn/tsconfig", "workspace:etc/tsconfig"],\
+            ["@types/node", "npm:17.0.21"],\
             ["ts-node", "virtual:7dc51174bd668f43741287de6e61c37eb2c02f662b7c133011ce16d602287d670e9edd66bab9da373f17eb47067f527b6cf54613c38493bf23994bde347932ad#npm:10.7.0"],\
             ["ttypescript", "virtual:7dc51174bd668f43741287de6e61c37eb2c02f662b7c133011ce16d602287d670e9edd66bab9da373f17eb47067f527b6cf54613c38493bf23994bde347932ad#npm:1.5.13"],\
             ["typescript", "patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=bda367"]\
@@ -1395,6 +1396,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.cache/yarn/@types-minimist-npm-1.2.2-a445de65da-b8da83c66e.zip/node_modules/@types/minimist/",\
           "packageDependencies": [\
             ["@types/minimist", "npm:1.2.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/node", [\
+        ["npm:17.0.21", {\
+          "packageLocation": "./.cache/yarn/@types-node-npm-17.0.21-7d68eb6a13-89dcd2fe82.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:17.0.21"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6223,7 +6233,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.9"],\
             ["@tsconfig/node14", "npm:1.0.1"],\
             ["@tsconfig/node16", "npm:1.0.2"],\
-            ["@types/node", null],\
+            ["@types/node", "npm:17.0.21"],\
             ["@types/swc__core", null],\
             ["@types/swc__wasm", null],\
             ["@types/typescript", null],\
