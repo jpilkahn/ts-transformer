@@ -1,11 +1,22 @@
 import * as ts from 'typescript'
 
-interface Config {}
+// interface Config {}
 
-const invalidValues = new Set<unknown>([undefined, null, NaN])
+const nullishValues = [null, undefined]
+type Nullish = (typeof nullishValues)[number]
 
-function isValidValue<T>(value: T) {
-    return !invalidValues.has(value)
+function includes(
+    sequence: unknown[],
+    value: unknown
+) { return sequence.includes(value) }
+
+function excludes(
+    sequence: unknown[],
+    value: unknown
+) { return !includes(sequence, value) }
+
+function isDefined<T>(value: T | Nullish): value is T {
+    return excludes(nullishValues, value)
 }
 
 function getLiteralValue(
@@ -28,7 +39,7 @@ const foldBinaryExpression = (
     const lhs = getLiteralValue(node.left, typeChecker)
     const rhs = getLiteralValue(node.right, typeChecker)
 
-    if (isValidValue(lhs) && isValidValue(rhs)) {
+    if (isDefined(lhs) && isDefined(rhs)) {
         switch (node.operatorToken.kind) {
         case ts.SyntaxKind.PlusToken:
             return ts.factory.createNumericLiteral(
@@ -41,8 +52,7 @@ const foldBinaryExpression = (
 }
 
 const transformer = (
-    program: ts.Program,
-    _config?: Config
+    program: ts.Program
 ): ts.TransformerFactory<ts.SourceFile> => {
     const typeChecker = program.getTypeChecker()
 

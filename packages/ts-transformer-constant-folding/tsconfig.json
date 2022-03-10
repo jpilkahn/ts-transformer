@@ -10,5 +10,5 @@
         "sourceMap": false,
         "types": ["node"]
     },
-    "files": ["test/input.ts"]
+    "include": ["test/fixture/*.ts"]
 }
