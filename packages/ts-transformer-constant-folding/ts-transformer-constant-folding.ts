@@ -1,6 +1,6 @@
 import * as ts from 'typescript'
 
-// interface Config {}
+import { isFoldableOperatorToken, operation } from './binary-op'
 
 const nullishValues = [null, undefined]
 type Nullish = (typeof nullishValues)[number]
@@ -39,13 +39,18 @@ const foldBinaryExpression = (
     const lhs = getLiteralValue(node.left, typeChecker)
     const rhs = getLiteralValue(node.right, typeChecker)
 
-    if (isDefined(lhs) && isDefined(rhs)) {
-        switch (node.operatorToken.kind) {
-        case ts.SyntaxKind.PlusToken:
-            return ts.factory.createNumericLiteral(
-                lhs + rhs
+    if (
+        isDefined(lhs)
+        && isDefined(rhs)
+        && isFoldableOperatorToken(node.operatorToken.kind)
+    ) {
+        return ts.factory.createNumericLiteral(
+            operation(
+                node.operatorToken.kind,
+                lhs,
+                rhs
             )
-        }
+        )
     }
 
     return node
