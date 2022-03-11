@@ -1,9 +1,10 @@
 import { describe, test } from '@jest/globals'
 
-import { makeExpect } from './expect'
+import { makeExpect } from '@jpilkahn/ts-transformer-testing'
+
 import testSubject from '../ts-transformer-constant-folding'
 
-const expect = makeExpect(testSubject)
+const expect = makeExpect(testSubject, __dirname, 'fixture')
 
 describe('Operands should be folded, when', () => {
     test(

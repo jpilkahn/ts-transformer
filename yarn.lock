@@ -657,6 +657,7 @@ __metadata:
   dependencies:
     "@jest/globals": ^27.5.1
     "@jest/types": ^27.5.1
+    "@jpilkahn/ts-transformer-testing": "workspace:*"
     "@jpilkahn/ts-util": "workspace:*"
     "@jpilkahn/tsconfig": "workspace:*"
     "@types/glob": ^7
@@ -672,6 +673,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@jpilkahn/ts-transformer-testing@workspace:*, @jpilkahn/ts-transformer-testing@workspace:lib/ts-transformer-testing":
+  version: 0.0.0-use.local
+  resolution: "@jpilkahn/ts-transformer-testing@workspace:lib/ts-transformer-testing"
+  dependencies:
+    "@jest/globals": ^27.5.1
+    "@jest/types": ^27.5.1
+    "@jpilkahn/tsconfig": "workspace:*"
+    "@types/glob": ^7
+    "@types/jest": ^27.4.1
+    "@types/node": ^17.0.21
+    glob: ^7.2.0
+    jest: ^27.5.1
+    ts-jest: ^27.1.3
+    ts-node: ^10.7.0
+    tslib: ^2.3.1
+    typescript: ^4.6.2
+  languageName: unknown
+  linkType: soft
+
 "@jpilkahn/ts-util@workspace:*, @jpilkahn/ts-util@workspace:lib/ts-util":
   version: 0.0.0-use.local
   resolution: "@jpilkahn/ts-util@workspace:lib/ts-util"
@@ -680,6 +700,7 @@ __metadata:
     "@jest/types": ^27.5.1
     "@jpilkahn/tsconfig": "workspace:*"
     "@types/jest": ^27.4.1
+    "@types/node": ^17.0.21
     jest: ^27.5.1
     ts-jest: ^27.1.3
     ts-node: ^10.7.0

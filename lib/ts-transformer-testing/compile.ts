@@ -1,11 +1,13 @@
 import { sync as globSync } from 'glob'
 import * as ts from 'typescript'
 
+import { logDiagnostics } from './diagnostics'
+
 export type ProgramTransformer = (
     program: ts.Program
 ) => ts.TransformerFactory<ts.SourceFile>
 
-const defaultCompilerOptions: Partial<ts.CompilerOptions> = {
+export const defaultCompilerOptions: Partial<ts.CompilerOptions> = {
     module: ts.ModuleKind.ES2015,
     moduleResolution: ts.ModuleResolutionKind.NodeJs,
     noEmitOnError: false,
@@ -15,36 +17,8 @@ const defaultCompilerOptions: Partial<ts.CompilerOptions> = {
     target: ts.ScriptTarget.ES2015
 }
 
-function withDefaults(options: Partial<ts.CompilerOptions>) {
+export function withDefaults(options: Partial<ts.CompilerOptions>) {
     return Object.assign({}, defaultCompilerOptions, options)
-}
-
-function logDiagnostics(
-    program: ts.Program,
-    emitResult: ts.EmitResult
-) {
-    ts.getPreEmitDiagnostics(program)
-        .concat(emitResult.diagnostics)
-        .forEach((diagnostic) => {
-            const message = ts.flattenDiagnosticMessageText(
-                diagnostic.messageText,
-                '\n'
-            )
-
-            const { line, character } = (
-                diagnostic.start && diagnostic.file
-                ? diagnostic.file.getLineAndCharacterOfPosition(
-                    diagnostic.start
-                ) : { line: -1, character: -1 }
-            )
-
-            const fileName = diagnostic?.file?.fileName || 'unknown file'
-
-            console.log(
-                `${fileName}:${line + 1}:${character + 1}`,
-                message
-            )
-    })
 }
 
 export function compiler(
