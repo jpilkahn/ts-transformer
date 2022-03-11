@@ -1,0 +1,7 @@
+{
+    "extends": "@jpilkahn/tsconfig",
+    "compilerOptions": {
+        "outDir": "build"
+    },
+    "exclude": ["build/*"]
+}

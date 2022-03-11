@@ -1,23 +1,8 @@
 import * as ts from 'typescript'
 
+import { isNotNullish } from '@jpilkahn/ts-util'
+
 import { isFoldableOperatorToken, operation } from './binary-op'
-
-const nullishValues = [null, undefined]
-type Nullish = (typeof nullishValues)[number]
-
-function includes(
-    sequence: unknown[],
-    value: unknown
-) { return sequence.includes(value) }
-
-function excludes(
-    sequence: unknown[],
-    value: unknown
-) { return !includes(sequence, value) }
-
-function isDefined<T>(value: T | Nullish): value is T {
-    return excludes(nullishValues, value)
-}
 
 function getLiteralValue(
     node: ts.Node,
@@ -40,8 +25,8 @@ const foldBinaryExpression = (
     const rhs = getLiteralValue(node.right, typeChecker)
 
     if (
-        isDefined(lhs)
-        && isDefined(rhs)
+        isNotNullish(lhs)
+        && isNotNullish(rhs)
         && isFoldableOperatorToken(node.operatorToken.kind)
     ) {
         return ts.factory.createNumericLiteral(
@@ -61,18 +46,16 @@ const transformer = (
 ): ts.TransformerFactory<ts.SourceFile> => {
     const typeChecker = program.getTypeChecker()
 
-    return (context) => {
-        return (sourceFile) => {
-            const visitor = (node: ts.Node): ts.Node => {
-                if (ts.isBinaryExpression(node)) {
-                    return foldBinaryExpression(node, typeChecker)
-                }
-
-                return ts.visitEachChild(node, visitor, context)
+    return (context) => (sourceFile) => {
+        const visitor = (node: ts.Node): ts.Node => {
+            if (ts.isBinaryExpression(node)) {
+                return foldBinaryExpression(node, typeChecker)
             }
 
-            return ts.visitNode(sourceFile, visitor)
+            return ts.visitEachChild(node, visitor, context)
         }
+
+        return ts.visitNode(sourceFile, visitor)
     }
 }
 

@@ -657,6 +657,7 @@ __metadata:
   dependencies:
     "@jest/globals": ^27.5.1
     "@jest/types": ^27.5.1
+    "@jpilkahn/ts-util": "workspace:*"
     "@jpilkahn/tsconfig": "workspace:*"
     "@types/glob": ^7
     "@types/jest": ^27.4.1
@@ -671,6 +672,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@jpilkahn/ts-util@workspace:*, @jpilkahn/ts-util@workspace:lib/ts-util":
+  version: 0.0.0-use.local
+  resolution: "@jpilkahn/ts-util@workspace:lib/ts-util"
+  dependencies:
+    "@jest/globals": ^27.5.1
+    "@jest/types": ^27.5.1
+    "@jpilkahn/tsconfig": "workspace:*"
+    "@types/jest": ^27.4.1
+    jest: ^27.5.1
+    ts-jest: ^27.1.3
+    ts-node: ^10.7.0
+    tslib: ^2.3.1
+    typescript: ^4.6.2
+  languageName: unknown
+  linkType: soft
+
 "@jpilkahn/tsconfig@workspace:*, @jpilkahn/tsconfig@workspace:etc/tsconfig":
   version: 0.0.0-use.local
   resolution: "@jpilkahn/tsconfig@workspace:etc/tsconfig"
@@ -680,6 +697,12 @@ __metadata:
 "@jpilkahn/worktree-etc@workspace:etc":
   version: 0.0.0-use.local
   resolution: "@jpilkahn/worktree-etc@workspace:etc"
+  languageName: unknown
+  linkType: soft
+
+"@jpilkahn/worktree-lib@workspace:lib":
+  version: 0.0.0-use.local
+  resolution: "@jpilkahn/worktree-lib@workspace:lib"
   languageName: unknown
   linkType: soft
 
