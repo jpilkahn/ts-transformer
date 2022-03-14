@@ -1,17 +1,26 @@
 import { expect } from '@jest/globals'
-import { resolve } from 'path'
 
-import { compiler, ProgramTransformer } from './compile'
+import {
+    ProgramTransformer,
+    TransformerTestingCompiler,
+    TransformerTestingCompilerOptions
+} from './compiler'
+
+function guaranteeTerminatingEol(value: string) {
+    return `${value}${value.endsWith('\n') ? '' : '\n'}`
+}
 
 export function makeExpect(
     transformer: ProgramTransformer,
-    ...basePathSegments: string[]
+    options: TransformerTestingCompilerOptions = (
+        TransformerTestingCompiler.defaultOptions
+    )
 ) {
-    const compile = compiler(transformer)
+    const compiler = new TransformerTestingCompiler(transformer, options)
 
-    return (relpath: string) => ({
+    return (input: string) => ({
         toBe: (expected: string) => () => expect(
-            compile(resolve(...basePathSegments, relpath))
-        ).toBe(expected)
+            compiler.compile(input)
+        ).toBe(guaranteeTerminatingEol(expected))
     })
 }

@@ -700,6 +700,7 @@ __metadata:
     "@jest/globals": ^27.5.1
     "@jest/types": ^27.5.1
     "@jpilkahn/fs-util": "workspace:*"
+    "@jpilkahn/ts-util": "workspace:*"
     "@jpilkahn/tsconfig": "workspace:*"
     "@types/glob": ^7
     "@types/jest": ^27.4.1

@@ -1178,6 +1178,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@jest/globals", "npm:27.5.1"],\
             ["@jest/types", "npm:27.5.1"],\
             ["@jpilkahn/fs-util", "workspace:lib/fs-util"],\
+            ["@jpilkahn/ts-util", "workspace:lib/ts-util"],\
             ["@jpilkahn/tsconfig", "workspace:etc/tsconfig"],\
             ["@types/glob", "npm:7.2.0"],\
             ["@types/jest", "npm:27.4.1"],\
