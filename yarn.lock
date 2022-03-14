@@ -651,6 +651,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jpilkahn/fs-util@workspace:*, @jpilkahn/fs-util@workspace:lib/fs-util":
+  version: 0.0.0-use.local
+  resolution: "@jpilkahn/fs-util@workspace:lib/fs-util"
+  dependencies:
+    "@jest/globals": ^27.5.1
+    "@jest/types": ^27.5.1
+    "@jpilkahn/tsconfig": "workspace:*"
+    "@types/async": ^3
+    "@types/jest": ^27.4.1
+    "@types/node": ^17.0.21
+    async: ^3.2.3
+    jest: ^27.5.1
+    temp-dir: ^2.0.0
+    ts-jest: ^27.1.3
+    ts-node: ^10.7.0
+    tslib: ^2.3.1
+    typescript: ^4.6.2
+  languageName: unknown
+  linkType: soft
+
 "@jpilkahn/ts-transformer-constant-folding@workspace:packages/ts-transformer-constant-folding":
   version: 0.0.0-use.local
   resolution: "@jpilkahn/ts-transformer-constant-folding@workspace:packages/ts-transformer-constant-folding"
@@ -679,6 +699,7 @@ __metadata:
   dependencies:
     "@jest/globals": ^27.5.1
     "@jest/types": ^27.5.1
+    "@jpilkahn/fs-util": "workspace:*"
     "@jpilkahn/tsconfig": "workspace:*"
     "@types/glob": ^7
     "@types/jest": ^27.4.1
@@ -1865,6 +1886,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/async@npm:^3":
+  version: 3.2.12
+  resolution: "@types/async@npm:3.2.12"
+  checksum: 7312830df42cab4c82b7aaeb9da8c0f52e5e2c3befbf24062669812890d42354ebfcb98c0a731e048dd445170ae9978a4c6447c95b03747d82d77fca26a8a2d7
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.14":
   version: 7.1.18
   resolution: "@types/babel__core@npm:7.1.18"
@@ -2305,6 +2333,13 @@ __metadata:
   version: 1.0.0
   resolution: "assert-plus@npm:1.0.0"
   checksum: 19b4340cb8f0e6a981c07225eacac0e9d52c2644c080198765d63398f0075f83bbc0c8e95474d54224e297555ad0d631c1dcd058adb1ddc2437b41a6b424ac64
+  languageName: node
+  linkType: hard
+
+"async@npm:^3.2.3":
+  version: 3.2.3
+  resolution: "async@npm:3.2.3"
+  checksum: c4bee57ab2249af3dc83ca3ef9acfa8e822c0d5e5aa41bae3eaf7f673648343cd64ecd7d26091ffd357f3f044428b17b5f00098494b6cf8b6b3e9681f0636ca1
   languageName: node
   linkType: hard
 
@@ -7681,6 +7716,13 @@ __metadata:
   version: 1.0.0
   resolution: "temp-dir@npm:1.0.0"
   checksum: cb2b58ddfb12efa83e939091386ad73b425c9a8487ea0095fe4653192a40d49184a771a1beba99045fbd011e389fd563122d79f54f82be86a55620667e08a6b2
+  languageName: node
+  linkType: hard
+
+"temp-dir@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "temp-dir@npm:2.0.0"
+  checksum: cc4f0404bf8d6ae1a166e0e64f3f409b423f4d1274d8c02814a59a5529f07db6cd070a749664141b992b2c1af337fa9bb451a460a43bb9bcddc49f235d3115aa
   languageName: node
   linkType: hard
 
