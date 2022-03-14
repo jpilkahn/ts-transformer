@@ -4,58 +4,39 @@ import { makeExpect } from '@jpilkahn/ts-transformer-testing'
 
 import testSubject from '../ts-transformer-constant-folding'
 
-const expect = makeExpect(testSubject, __dirname, 'fixture')
+const expect = makeExpect(testSubject)
+
+const operatorStrings = ['+', '-', '*', '/', '**']
+const expected3and2 = [5, 1, 6, 1.5, 9]
 
 describe('Operands should be folded, when', () => {
-    test(
-        'both are in-place `NumericLiteral` nodes',
-        expect('numeric-literal.ts')
-            .toBe(`const five = 5;
-`)
+    describe(
+        'nodes are of type `NumericLiteral` (in-place)',
+        () => {
+            for (let i = 0; i < operatorStrings.length; i++) {
+                test(
+                    `and the operator is ${operatorStrings[i]}`,
+                    expect(`const result = 3 ${operatorStrings[i]} 2`)
+                    .toBe(`const result = ${expected3and2[i]};`)
+                )
+            }
+        }
     )
 
-    test(
-        'both are `Identifier` nodes holding `NumericLiteral` values',
-        expect('identifier.ts')
-            .toBe(
-`const one = 1;
+    describe(
+        'nodes are of type `Identifier` (holding `NumericLiteral` values)',
+        () => {
+            for (let i = 0; i < operatorStrings.length; i++) {
+                test(
+                    `and the operator is ${operatorStrings[i]}`,
+                    expect(`const three = 3
+const two = 2
+const result = three ${operatorStrings[i]} two`)
+                    .toBe(`const three = 3;
 const two = 2;
-const three = 3;
-`)
-    )
-
-    test(
-        'the operation is an addition (operator is `SyntaxKind.PlusToken`)',
-        expect('plus-token.ts')
-            .toBe(`const plus = 5;
-`)
-    )
-
-    test(
-        'the operation is a subtraction (operator is `SyntaxKind.MinusToken`)',
-        expect('minus-token.ts')
-            .toBe(`const minus = 1;
-`)
-    )
-
-    test(
-        'the operation is a multiplication (operator is `SyntaxKind.AsteriskToken`)',
-        expect('asterisk-token.ts')
-            .toBe(`const asterisk = 6;
-`)
-    )
-
-    test(
-        'the operation is a division (operator is `SyntaxKind.SlashToken`)',
-        expect('slash-token.ts')
-            .toBe(`const slash = 1.5;
-`)
-    )
-
-    test(
-        'the operation is an exponentiation (operator is `SyntaxKind.AsteriskAsteriskToken`)',
-        expect('asterisk-asterisk-token.ts')
-            .toBe(`const asteriskAsterisk = 9;
-`)
+const result = ${expected3and2[i]};`)
+                )
+            }
+        }
     )
 })

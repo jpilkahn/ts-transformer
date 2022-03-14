@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 
 import { BaseDirectory } from '../common'
-import { removeFiles } from '../remove-files'
+import { removeFilesSync } from '../remove-files'
 import { prependTmpPathToOptions } from '../tmp-path'
 import type { WriteFileInput, WriteFileOptions } from '../write-files'
 import {
@@ -67,7 +67,7 @@ export class FilesHandler {
     ///
     /// TODO: This should also remove previously created directories.
     remove() {
-        removeFiles(
+        removeFilesSync(
             Array.from(this._files.values()),
             this._options
         )
