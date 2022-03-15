@@ -2,6 +2,8 @@ import * as ts from 'typescript'
 
 import { isFoldableOperatorToken, operation } from './binary-op'
 
+type NumberOrNode = number | ts.Node
+
 function isFoldableOperand(value: unknown): value is number {
     return typeof value === 'number'
 }
@@ -9,9 +11,13 @@ function isFoldableOperand(value: unknown): value is number {
 function processOperand(
     node: ts.Node,
     typeChecker: ts.TypeChecker
-): number | ts.Node | undefined {
+): NumberOrNode {
     if (ts.isBinaryExpression(node)) {
         return processBinaryExpression(node, typeChecker)
+    }
+
+    if (ts.isParenthesizedExpression(node)) {
+        return processOperand(node.expression, typeChecker)
     }
 
     const typeInfo = typeChecker.getTypeAtLocation(node)
@@ -20,7 +26,7 @@ function processOperand(
         return typeInfo.value
     }
 
-    return undefined
+    return node
 }
 
 const processBinaryExpression = (
@@ -48,6 +54,14 @@ const processBinaryExpression = (
     return node
 }
 
+function numericLiteralOrNode(value: NumberOrNode) {
+    return (
+        isFoldableOperand(value)
+            ? ts.factory.createNumericLiteral(value)
+            : value
+    )
+}
+
 const transformer = (
     program: ts.Program
 ): ts.TransformerFactory<ts.SourceFile> => {
@@ -56,12 +70,14 @@ const transformer = (
     return (context) => (sourceFile) => {
         const visitor = (node: ts.Node): ts.Node => {
             if (ts.isBinaryExpression(node)) {
-                const value = processBinaryExpression(node, typeChecker)
+                return numericLiteralOrNode(
+                    processBinaryExpression(node, typeChecker)
+                )
+            }
 
-                return (
-                    isFoldableOperand(value)
-                        ? ts.factory.createNumericLiteral(value)
-                        : node
+            if (ts.isParenthesizedExpression(node)) {
+                return numericLiteralOrNode(
+                    processOperand(node.expression, typeChecker)
                 )
             }
 
