@@ -1,1 +1,2 @@
-const result = 3 + 2
+const three = 3
+const result = three + 2

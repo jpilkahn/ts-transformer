@@ -2,11 +2,11 @@ import type { SyntaxKind } from 'typescript'
 
 import { operatorFnMap } from './operator-fn-map'
 
-export type FoldableOperatorToken = keyof typeof operatorFnMap
+export type OperatorToken = keyof typeof operatorFnMap
 
-export function isFoldableOperatorToken(
+export function isOperatorToken(
     token: SyntaxKind
-): token is FoldableOperatorToken {
+): token is OperatorToken {
     return Object.keys(operatorFnMap).includes(
         token.toString()
     )

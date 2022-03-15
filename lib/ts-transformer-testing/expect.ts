@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals'
 
 import {
-    ProgramTransformer,
+    ProgramTransformersByStage,
     TransformerTestingCompiler,
     TransformerTestingCompilerOptions
 } from './compiler'
@@ -11,12 +11,12 @@ function guaranteeTerminatingEol(value: string) {
 }
 
 export function makeExpect(
-    transformer: ProgramTransformer,
+    transformers: ProgramTransformersByStage,
     options: TransformerTestingCompilerOptions = (
         TransformerTestingCompiler.defaultOptions
     )
 ) {
-    const compiler = new TransformerTestingCompiler(transformer, options)
+    const compiler = new TransformerTestingCompiler(transformers, options)
 
     return (input: string) => ({
         toBe: (expected: string) => () => expect(

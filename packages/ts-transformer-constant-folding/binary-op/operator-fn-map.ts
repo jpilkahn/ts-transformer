@@ -1,13 +1,11 @@
 import { SyntaxKind } from 'typescript'
 
-export type Operand = number
-
-export type BinaryOp<T> = (lhs: T, rhs: T) => T
+import type { BinaryOp } from './binary-op-fn'
 
 const makeOperatorFnMap = <
     TMap extends Record<
         number,
-        BinaryOp<Operand>
+        BinaryOp
     >
 >(map: TMap) => map
 

@@ -6,9 +6,11 @@
         "outDir": "build",
         "plugins": [{
             "transform": "./ts-transformer-constant-folding.ts"
+        },{
+            "transform": "./ts-transformer-constant-folding.ts",
+            "afterDeclarations": true
         }],
-        "sourceMap": false,
-        "types": ["node"]
+        "sourceMap": false
     },
     "include": ["test/fixture/*.ts"]
 }

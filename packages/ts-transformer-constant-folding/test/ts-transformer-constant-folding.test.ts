@@ -3,9 +3,12 @@ import { describe, test } from '@jest/globals'
 import { makeExpect } from '@jpilkahn/ts-transformer-testing'
 import { nextElementWrapped } from '@jpilkahn/ts-util'
 
-import testSubject from '../ts-transformer-constant-folding'
+import transformer from '../ts-transformer-constant-folding'
 
-const expect = makeExpect(testSubject)
+const expect = makeExpect({
+    before: [transformer],
+    afterDeclarations: [transformer]
+})
 
 const operatorStrings = ['+', '-', '*', '/', '**']
 const expected32 = [5, 1, 6, 1.5, 9]

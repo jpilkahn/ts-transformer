@@ -18,6 +18,12 @@ export type TransformerTestingCompilerOptions = (
     & { inputKind: CompilationInputKind }
 )
 
+export type TransformStage = keyof ts.CustomTransformers
+
+export type ProgramTransformersByStage = {
+    [K in TransformStage]?: ProgramTransformer[]
+}
+
 export class TransformerTestingCompiler {
     static readonly defaultInputKind = CompilationInputKind.Source
     static readonly defaultOptions: TransformerTestingCompilerOptions = {
@@ -27,16 +33,16 @@ export class TransformerTestingCompiler {
 
     private _filesHandler?: FilesHandler
     private _options: TransformerTestingCompilerOptions
-    private _transformer!: ProgramTransformer
+    private _transformers!: ProgramTransformersByStage
 
     constructor(
-        transformer: ProgramTransformer,
+        transformers: ProgramTransformersByStage,
         options: TransformerTestingCompilerOptions = (
             TransformerTestingCompiler.defaultOptions
         )
     ) {
         this._options = options
-        this._transformer = transformer
+        this._transformers = transformers
     }
 
     private __setup(
@@ -70,6 +76,17 @@ export class TransformerTestingCompiler {
                 assertUnreachable(inputKind)
                 return []
         }
+    }
+
+    private __initTransformers(program: ts.Program) {
+        return Object.fromEntries(
+            Object.entries(
+                this._transformers
+            ).map(([key, value]) => [
+                key,
+                value.map((transformer) => transformer(program))
+            ])
+        )
     }
 
     private __tearDown(
@@ -114,11 +131,9 @@ export class TransformerTestingCompiler {
             undefined,
             writeFileCallback,
             undefined,
-            undefined, {
-            before: [
-                this._transformer(program)
-            ]
-        })
+            undefined,
+            this.__initTransformers(program)
+        )
 
         logDiagnostics(program, emitResult)
 
