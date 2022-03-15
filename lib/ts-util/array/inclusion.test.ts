@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals'
 
-import { excludes, includes } from './array'
+import { excludes, includes } from './inclusion'
 
 const refA = {}
 const refB = {}

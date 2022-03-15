@@ -1,13 +1,19 @@
 import * as ts from 'typescript'
 
-import { isNotNullish } from '@jpilkahn/ts-util'
-
 import { isFoldableOperatorToken, operation } from './binary-op'
 
-function getLiteralValue(
+function isFoldableOperand(value: unknown): value is number {
+    return typeof value === 'number'
+}
+
+function processOperand(
     node: ts.Node,
     typeChecker: ts.TypeChecker
-) {
+): number | ts.Node | undefined {
+    if (ts.isBinaryExpression(node)) {
+        return processBinaryExpression(node, typeChecker)
+    }
+
     const typeInfo = typeChecker.getTypeAtLocation(node)
 
     if (typeInfo.isNumberLiteral()) {
@@ -17,24 +23,25 @@ function getLiteralValue(
     return undefined
 }
 
-const foldBinaryExpression = (
+const processBinaryExpression = (
     node: ts.BinaryExpression,
     typeChecker: ts.TypeChecker
 ) => {
-    const lhs = getLiteralValue(node.left, typeChecker)
-    const rhs = getLiteralValue(node.right, typeChecker)
+    if (!isFoldableOperatorToken(node.operatorToken.kind)) {
+        return node
+    }
+
+    const lhs = processOperand(node.left, typeChecker)
+    const rhs = processOperand(node.right, typeChecker)
 
     if (
-        isNotNullish(lhs)
-        && isNotNullish(rhs)
-        && isFoldableOperatorToken(node.operatorToken.kind)
+        isFoldableOperand(lhs)
+        && isFoldableOperand(rhs)
     ) {
-        return ts.factory.createNumericLiteral(
-            operation(
-                node.operatorToken.kind,
-                lhs,
-                rhs
-            )
+        return operation(
+            node.operatorToken.kind,
+            lhs,
+            rhs
         )
     }
 
@@ -49,7 +56,13 @@ const transformer = (
     return (context) => (sourceFile) => {
         const visitor = (node: ts.Node): ts.Node => {
             if (ts.isBinaryExpression(node)) {
-                return foldBinaryExpression(node, typeChecker)
+                const value = processBinaryExpression(node, typeChecker)
+
+                return (
+                    isFoldableOperand(value)
+                        ? ts.factory.createNumericLiteral(value)
+                        : node
+                )
             }
 
             return ts.visitEachChild(node, visitor, context)
